@@ -7,7 +7,7 @@ enum TaskStatus {
 export class Task {
   id: number;
   title: string;
-  status: TaskStatus;
+  status: TaskStatus = TaskStatus.TO_DO;
   responsible: string;
   repository_id: number;
 }
