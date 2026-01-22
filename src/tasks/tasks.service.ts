@@ -37,6 +37,10 @@ export class TasksService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+    const taskToRemove = this.findOne(id);
+    const taskIndex = this.database.indexOf(taskToRemove);
+    if (taskIndex != -1) {
+      this.database.splice(taskIndex, 1);
+    }
   }
 }
