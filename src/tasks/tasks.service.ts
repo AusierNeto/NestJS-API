@@ -33,7 +33,9 @@ export class TasksService {
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+    const taskToUpdate: Task = this.findOne(id);
+    Object.assign(taskToUpdate, updateTaskDto);
+    return taskToUpdate;
   }
 
   remove(id: number) {
