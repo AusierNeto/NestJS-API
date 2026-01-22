@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
@@ -23,11 +23,13 @@ export class TasksService {
   }
 
   findAll() {
-    this.database.forEach((e) => (e.title, e.status, e.responsible));
+    return this.database;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} task`;
+    const found_task = this.database.find((e) => e.id === id);
+    if (found_task) return found_task;
+    else throw new NotFoundException();
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
