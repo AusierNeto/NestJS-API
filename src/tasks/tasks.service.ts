@@ -2,11 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TasksService {
   private database: Array<Task> = [];
 
+  constructor(
+    @InjectRepository(Task) 
+    private readonly repository: Repository<Task>
+  ) {}
+  
   create(createTaskDto: CreateTaskDto) {
     const last_index: number = this.database.length
       ? this.database[this.database.length - 1].id + 1
