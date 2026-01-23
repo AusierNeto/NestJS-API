@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/user/entities/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 enum TaskStatus {
   TO_DO = 'To Do',
@@ -17,8 +18,8 @@ export class Task {
   @Column()
   status: TaskStatus = TaskStatus.TO_DO;
 
-  @Column()
-  responsible: string;
+  @ManyToOne(() => User, user => user.tasks)
+  user: User;
 
   @Column()
   repository_id: number;
