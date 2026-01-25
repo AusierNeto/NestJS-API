@@ -23,10 +23,10 @@ export class User {
   password: string;
 
   @Column()
-  role: UserRole = UserRole.USER
+  role: UserRole = UserRole.USER;
 
   @OneToMany(() => Task, task => task.user)
-  tasks: Task[]
+  tasks: Task[];
 
   @BeforeInsert()
   async hashPassword() {
