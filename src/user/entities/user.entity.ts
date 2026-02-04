@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { Task } from 'src/tasks/entities/task.entity';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-enum UserRole {
+export enum UserRole {
   SUPER = 'super',
   ADMIN = 'admin',
   USER = 'user',
