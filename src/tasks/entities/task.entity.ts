@@ -1,5 +1,5 @@
-import { User } from "src/user/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 enum TaskStatus {
   TO_DO = 'To Do',
@@ -18,7 +18,7 @@ export class Task {
   @Column()
   status: TaskStatus = TaskStatus.TO_DO;
 
-  @ManyToOne(() => User, user => user.tasks)
+  @ManyToOne(() => User, (user) => user.tasks)
   user: User;
 
   @Column()

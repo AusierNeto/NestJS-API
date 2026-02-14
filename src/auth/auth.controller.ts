@@ -10,5 +10,4 @@ export class AuthController {
   postLogin(@Body() user: LoginDto) {
     return this.authService.login(user);
   }
-
 }

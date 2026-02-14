@@ -3,11 +3,17 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const config = new DocumentBuilder().setTitle('Tasks API').build();
+  const config = new DocumentBuilder()
+    .setTitle('Tasks API')
+    .setDescription('Tasks API for NestJS Foundation')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
   const app = await NestFactory.create(AppModule);
   const swaggerDocument = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('swagger', app, swaggerDocument);
   await app.listen(process.env.PORT ?? 3000);
 }
+
 bootstrap();

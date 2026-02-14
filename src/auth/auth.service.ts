@@ -14,10 +14,13 @@ export class AuthService {
   async login(user: LoginDto) {
     const userRegister = await this.userService.findByEmail(user.email);
     if (await bcrypt.compare(user.password, userRegister.password)) {
-      const payload: object = {'user': userRegister.email, 'sub': userRegister.id};
+      const payload: object = {
+        user: userRegister.email,
+        sub: userRegister.id,
+      };
       const token: string = this.jwtService.sign(payload);
-  
-      return {'access_token': token};
+
+      return { access_token: token };
     } else throw new UnauthorizedException();
   }
 }
