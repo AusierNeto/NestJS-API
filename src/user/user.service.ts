@@ -3,14 +3,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { IUserService } from './interfaces/user-service.interface';
-import { IUserRepository } from './interfaces/user-repository.interface';
+import { IRepository } from 'src/interfaces/repository.interface';
 
 @Injectable()
 export class UserService implements IUserService {
-
-  constructor (
-    @Inject(IUserRepository) 
-    private readonly repository: IUserRepository<User>
+  constructor(
+    @Inject(IRepository)
+    private readonly repository: IRepository<User>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -23,13 +22,13 @@ export class UserService implements IUserService {
   }
 
   async findOne(id: number) {
-    const foundUser = await this.repository.findOneBy({id});
+    const foundUser = await this.repository.findOneBy({ id });
     if (foundUser) return foundUser;
-    else throw new NotFoundException(); 
+    else throw new NotFoundException();
   }
 
   async findByEmail(email: string) {
-    const foundUser = await this.repository.findOneBy({email});
+    const foundUser = await this.repository.findOneBy({ email });
     if (foundUser) return foundUser;
     else throw new NotFoundException();
   }

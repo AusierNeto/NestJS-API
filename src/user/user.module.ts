@@ -4,7 +4,7 @@ import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repository/user-typeorm.repository';
-import { IUserRepository } from './interfaces/user-repository.interface';
+import { IRepository } from 'src/interfaces/repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -12,10 +12,10 @@ import { IUserRepository } from './interfaces/user-repository.interface';
   providers: [
     UserService,
     {
-      provide: IUserRepository, 
-      useClass: UserRepository
-    }
+      provide: IRepository,
+      useClass: UserRepository,
+    },
   ],
-  exports: [UserService]
+  exports: [UserService],
 })
 export class UserModule {}
