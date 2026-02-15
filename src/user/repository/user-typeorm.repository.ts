@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { IRepository } from 'src/interfaces/repository.interface';
+import { IRepository } from 'src/common/interfaces/repository.interface';
 
 @Injectable()
 export class UserRepository implements IRepository<User> {

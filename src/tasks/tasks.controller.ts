@@ -29,7 +29,7 @@ export class TasksController {
 
   @Get()
   findAll(@Req() req) {
-    return this.tasksService.findAll(req.user.sub);
+    return this.tasksService.findAll(req.user);
   }
 
   @Get(':id')

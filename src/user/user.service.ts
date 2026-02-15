@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { IUserService } from './interfaces/user-service.interface';
-import { IRepository } from 'src/interfaces/repository.interface';
+import { IRepository } from 'src/common/interfaces/repository.interface';
 
 @Injectable()
 export class UserService implements IUserService {

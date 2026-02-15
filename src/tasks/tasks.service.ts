@@ -2,28 +2,24 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { IRepository } from 'src/common/interfaces/repository.interface';
 
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(Task)
-    private readonly repository: Repository<Task>,
+    private readonly repository: IRepository<Task>,
   ) {}
 
   async create(createTaskDto: CreateTaskDto, user: User) {
-    const new_task = this.repository.create({ ...createTaskDto, user });
+    const new_task = await this.repository.create({ ...createTaskDto, user });
     return await this.repository.save(new_task);
   }
 
-  async findAll(userId: number) {
-    return await this.repository.find({
-      where: {
-        user: { id: userId },
-      },
-    });
+  async findAll(user: User) {
+    return await this.repository.findOneBy({ user: user });
   }
 
   async findOne(id: number, user: User) {
