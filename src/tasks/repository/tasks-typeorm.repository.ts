@@ -24,8 +24,14 @@ export class TaskRepository implements ITasksRepository<Task> {
     return await this.repository.find();
   }
 
-  async findOneBy(criteria: Partial<Task>): Promise<Task | null> {
+  async findBy(criteria: Partial<Task>): Promise<Task | null> {
     return await this.repository.findOneBy(criteria as FindOptionsWhere<Task>);
+  }
+
+  async findAllByUser(userId: number): Promise<Task[] | null> {
+    return await this.repository.findBy({
+      user: { id: userId },
+    } as FindOptionsWhere<Task>);
   }
 
   async remove(task: Task): Promise<Task> {

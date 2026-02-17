@@ -29,12 +29,12 @@ export class TasksController {
 
   @Get()
   findAll(@Req() req) {
-    return this.tasksService.findAll(req.user);
+    return this.tasksService.findByUser(req.user);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string, @Req() req) {
-    return this.tasksService.findOne(+id, req.user);
+    return this.tasksService.findBy({ id: +id, user: req.user });
   }
 
   @Patch(':id')
@@ -48,6 +48,7 @@ export class TasksController {
 
   @Delete(':id')
   remove(@Param('id') id: string, @Req() req) {
-    return this.tasksService.remove(+id, req.user);
+    console.log('Removing task with id:', id, 'for user:', req.user);
+    return this.tasksService.remove(+id);
   }
 }
