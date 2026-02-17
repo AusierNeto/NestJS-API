@@ -24,8 +24,8 @@ export class UserRepository implements IUserRepository<User> {
     return await this.repository.find();
   }
 
-  async findOneBy(criteria: Partial<User>): Promise<User | null> {
-    return await this.repository.findOneBy(criteria as FindOptionsWhere<User>);
+  async findBy(criteria: Partial<User>): Promise<User> {
+    return await this.repository.findBy(criteria as FindOptionsWhere<User>);
   }
 
   async remove(user: User): Promise<User> {
