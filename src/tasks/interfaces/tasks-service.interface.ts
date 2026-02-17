@@ -1,12 +1,16 @@
-import { IService } from 'src/common/interfaces/service.interface';
 import { User } from 'src/user/entities/user.entity';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { CreateTaskDto } from '../dto/create-task.dto';
 
-export abstract class ITasksService<Task> extends IService<Task> {
-  abstract create(createEntityDTO: Partial<Task>): Promise<Task>;
+export abstract class ITasksService<Task> {
+  abstract create(createTaskDTO: CreateTaskDto, user: User): Promise<Task>;
   abstract find(): Promise<Task[]>;
-  abstract findOneBy(criteria: Partial<Task>): Promise<Task | null>;
-  abstract update(id: number, updateTaskDto: UpdateTaskDto): Promise<Task>;
+  abstract findBy(criteria: Partial<Task>): Promise<Task | null>;
+  abstract update(
+    id: number,
+    updateTaskDto: UpdateTaskDto,
+    user: User,
+  ): Promise<Task>;
   abstract removeTask(id: number, user: User): Promise<Task>;
-  abstract findAll(user: User): Promise<Task[] | null>;
+  abstract findByUser(user: User): Promise<Task[] | null>;
 }

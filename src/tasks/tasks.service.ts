@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
@@ -21,31 +25,35 @@ export class TasksService extends ITasksService<Task> {
     return await this.repository.save(new_task);
   }
 
-  async findAll(user: User) {
-    return await this.repository.findOneBy({ user: user });
+  async find() {
+    return await this.repository.find();
   }
 
-  async findOneBy(criteria: Partial<Task>) {
-    const foundTask = await this.repository.findOneBy(criteria);
+  async findByUser(user: User) {
+    return await this.repository.findAllByUser(user.id);
+  }
+
+  async findBy(criteria: Partial<Task>) {
+    const foundTask = await this.repository.findBy(criteria);
     if (foundTask) return foundTask;
     else throw new NotFoundException();
   }
 
-  async update(id: number, updateTaskDto: UpdateTaskDto) {
-    const taskToUpdate: Task = await this.findOneBy({ id: id });
+  async update(id: number, updateTaskDto: UpdateTaskDto, user: User) {
+    const taskToUpdate: Task = await this.findBy({ id: id, user: user });
     Object.assign(taskToUpdate, updateTaskDto);
     await this.repository.save(taskToUpdate);
     return taskToUpdate;
   }
 
   async removeTask(id: number, user: User) {
-    const taskToRemove = await this.findOneBy({ id: id, user: user });
+    const taskToRemove = await this.findBy({ id: id, user: user });
     await this.repository.remove(taskToRemove);
     return taskToRemove;
   }
 
   async remove(id: number): Promise<void> {
-    const taskToRemove = await this.findOneBy({ id: id });
+    const taskToRemove = await this.findBy({ id: id });
     if (!taskToRemove) throw new NotFoundException();
     else throw new BadRequestException('Use removeTask method instead');
   }

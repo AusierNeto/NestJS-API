@@ -47,6 +47,6 @@ export class UserService implements IUserService {
   }
 
   async findOneBy(criteria: Partial<User>): Promise<User | null> {
-    return await this.repository.findOneBy(criteria);
+    return await this.repository.findBy(criteria);
   }
 }
