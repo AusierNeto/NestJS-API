@@ -21,7 +21,10 @@ export class TasksService extends ITasksService<Task> {
   }
 
   async create(createTaskDto: CreateTaskDto, user: User) {
-    const new_task = await this.repository.create({ ...createTaskDto, user });
+    const new_task = await this.repository.create({
+      ...createTaskDto,
+      user: { id: user.id } as User,
+    });
     return await this.repository.save(new_task);
   }
 

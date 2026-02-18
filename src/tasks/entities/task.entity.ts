@@ -1,7 +1,7 @@
 import { User } from 'src/user/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-enum TaskStatus {
+export enum TaskStatus {
   TO_DO = 'To Do',
   IN_PROGRESS = 'In Progress',
   DONE = 'Done',

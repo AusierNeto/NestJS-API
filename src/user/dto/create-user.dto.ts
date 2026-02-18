@@ -1,5 +1,5 @@
-import { Task } from "src/tasks/entities/task.entity";
-import { UserRole } from "../entities/user.entity";
+import { Task } from 'src/tasks/entities/task.entity';
+import { UserRole } from '../entities/user.entity';
 
 export class CreateUserDto {
   name: string;
