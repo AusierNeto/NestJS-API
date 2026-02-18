@@ -10,13 +10,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       // 2. Qual é a chave para abrir? (A MESMA que você usou no AuthModule)
-      secretOrKey: 'secret_placeholder_only_for_dev', 
+      secretOrKey: 'secret_placeholder_only_for_dev',
     });
   }
 
   // 3. O que fazer depois de abrir o token?
-  async validate(payload: any) {
+  validate(payload: any) {
     // O que retornarmos aqui vai virar o 'req.user' que usamos no Controller!
-    return { sub: payload.sub, email: payload.user };
+    return { id: payload.id, email: payload.user };
   }
 }

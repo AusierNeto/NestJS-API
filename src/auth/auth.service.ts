@@ -16,7 +16,7 @@ export class AuthService {
     if (await bcrypt.compare(user.password, userRegister.password)) {
       const payload: object = {
         user: userRegister.email,
-        sub: userRegister.id,
+        id: userRegister.id,
       };
       const token: string = this.jwtService.sign(payload);
 

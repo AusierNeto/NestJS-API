@@ -24,9 +24,8 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto, @GetUser() user) {
-    console.log('User creating task:', user);
-    return this.tasksService.create(createTaskDto, { id: user.sub } as User);
+  create(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User) {
+    return this.tasksService.create(createTaskDto, user);
   }
 
   @Get()
@@ -50,7 +49,6 @@ export class TasksController {
 
   @Delete(':id')
   remove(@Param('id') id: string, @GetUser() user: User) {
-    console.log('Removing task with id:', id, 'for user:', user);
-    return this.tasksService.remove(+id);
+    return this.tasksService.removeTask(+id, user);
   }
 }
