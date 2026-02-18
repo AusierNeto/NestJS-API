@@ -3,13 +3,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { IUserService } from './interfaces/user-service.interface';
-import { IRepository } from 'src/common/interfaces/repository.interface';
 import { IUserRepository } from './interfaces/user-repository.interface';
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
-    @Inject(IRepository)
+    @Inject(IUserRepository)
     private readonly repository: IUserRepository<User>,
   ) {}
 

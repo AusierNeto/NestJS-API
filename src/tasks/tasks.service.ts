@@ -2,11 +2,11 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  Inject,
 } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { ITasksService } from './interfaces/tasks-service.interface';
 import { ITasksRepository } from './interfaces/tasks-repository.interface';
@@ -14,7 +14,7 @@ import { ITasksRepository } from './interfaces/tasks-repository.interface';
 @Injectable()
 export class TasksService extends ITasksService<Task> {
   constructor(
-    @InjectRepository(Task)
+    @Inject(ITasksRepository)
     private readonly repository: ITasksRepository<Task>,
   ) {
     super();
