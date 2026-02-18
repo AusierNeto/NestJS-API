@@ -24,8 +24,9 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User) {
-    return this.tasksService.create(createTaskDto, user);
+  create(@Body() createTaskDto: CreateTaskDto, @GetUser() user) {
+    console.log('User creating task:', user);
+    return this.tasksService.create(createTaskDto, { id: user.sub } as User);
   }
 
   @Get()
