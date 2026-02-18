@@ -1,4 +1,4 @@
-import { IRepository } from 'src/common/interfaces/repository.interface';
+import { IRepository } from '../../common/interfaces/repository.interface';
 
 export abstract class ITasksRepository<Task> extends IRepository<Task> {
   abstract create(createEntityDTO: Partial<Task>): Promise<Task>;
