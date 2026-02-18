@@ -49,7 +49,6 @@ export class TasksController {
 
   @Delete(':id')
   remove(@Param('id') id: string, @GetUser() user: User) {
-    console.log('Removing task with id:', id, 'for user:', user);
-    return this.tasksService.remove(+id);
+    return this.tasksService.removeTask(+id, user);
   }
 }
