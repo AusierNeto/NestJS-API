@@ -7,7 +7,6 @@ import { ITasksRepository } from './interfaces/tasks-repository.interface';
 
 describe('TasksService', () => {
   let service: TasksService;
-  let repository: ITasksRepository<Task>;
 
   // Criamos um Mock do Repositório
   const mockRepository = {
@@ -30,7 +29,6 @@ describe('TasksService', () => {
     }).compile();
 
     service = module.get<TasksService>(TasksService);
-    repository = module.get<ITasksRepository<Task>>(ITasksRepository);
   });
 
   // Limpa os mocks entre cada teste para evitar "sujeira"
@@ -46,7 +44,7 @@ describe('TasksService', () => {
       const result = await service.findBy({ id: 1 });
 
       expect(result).toEqual(mockTask);
-      expect(repository.findBy).toHaveBeenCalledWith({ id: 1 });
+      expect(mockRepository.findBy).toHaveBeenCalledWith({ id: 1 });
     });
 
     it('deve lançar NotFoundException se a task não existir', async () => {
@@ -71,7 +69,7 @@ describe('TasksService', () => {
       const result = await service.update(1, updateDto, user);
 
       expect(result.title).toBe('New');
-      expect(repository.save).toHaveBeenCalled();
+      expect(mockRepository.save).toHaveBeenCalled();
     });
   });
 });

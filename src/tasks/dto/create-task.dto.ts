@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { TaskStatus } from '../entities/task.entity';
 
