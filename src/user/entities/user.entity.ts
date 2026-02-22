@@ -1,4 +1,3 @@
-import * as bcrypt from 'bcrypt';
 import { Task } from 'src/tasks/entities/task.entity';
 import {
   BeforeInsert,
@@ -7,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 export enum UserRole {
   SUPER = 'super',
@@ -37,6 +37,6 @@ export class User {
   @BeforeInsert()
   async hashPassword(): Promise<void> {
     if (!this.password) return;
-    this.password = (await bcrypt.hash(this.password, 10)) as string;
+    this.password = await bcrypt.hash(this.password, 10);
   }
 }

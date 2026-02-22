@@ -1,6 +1,11 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+
+interface JwtPayload {
+  id: number;
+  user: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -15,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   // 3. O que fazer depois de abrir o token?
-  validate(payload: any) {
+  validate(payload: JwtPayload) {
     // O que retornarmos aqui vai virar o 'req.user' que usamos no Controller!
     return { id: payload.id, email: payload.user };
   }
